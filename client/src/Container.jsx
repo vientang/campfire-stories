@@ -11,7 +11,7 @@ const Container = ({ children }) => {
       {/* Content */}
       { children }
       {/* Footer */}
-      <Footer /> 
+      <Footer className='layout-bottom'/>
     </div>
   )
 }

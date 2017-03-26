@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../utils/axios'
 import { browserHistory } from 'react-router'
 import {
   AUTH_ERROR,
@@ -8,7 +8,6 @@ import {
   REMOVE,
   UPADTE_USER
 } from './types'
-import cookie from 'react-cookie'
 
 /*
  * Helper
@@ -36,21 +35,6 @@ export function handleNotAdmin(errorMessage) {
   }
 }
 
-/*
- * Approving and Deleting Stories
- */
-const token = cookie.load('token');
-axios.defaults.headers.common['authorization'] = token;
-
-export function approveStory(id) {
-  return dispatch => {
-    return axios.put(`/api/admin?id=${id}`)
-      .then( () => {
-        browserHistory.push('/admin')
-      })
-  }
-}
-
 export function deleteStory(id) {
   return dispatch => {
     return axios.delete(`/api/admin?id=${id}`)
@@ -67,7 +51,7 @@ export function deleteStory(id) {
 
 export function getUsers(page=1) {
   return dispatch => {
-    return axios.get(`/api/admin/users?page=${page}`)
+    return axios.get(`/api/admin/users?page=${page}`, )
       .then( res => {
         dispatch({
           type: GET_ALL_USERS,

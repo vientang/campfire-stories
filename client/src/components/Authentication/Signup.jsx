@@ -1,7 +1,6 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-// import { Link } from 'react-router'
 
 import { renderField, renderAlert } from '../utils/formFields'
 import * as actions from '../../actions/authentication-actions'
@@ -15,17 +14,15 @@ class SignupForm extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  //
   onSubmit({firstName, lastName, email, password, passwordConfirmation}){
     this.props.registerUser({firstName, lastName, email, password, passwordConfirmation})
   }
 
-  //
   render (){
     const { handleSubmit } = this.props;
 
     return (
-      <form onSubmit={ handleSubmit(this.onSubmit) } role="form" id="register-form" method="post" >
+      <form onSubmit={ handleSubmit(this.onSubmit) } role="form" id="register-form">
         {renderAlert(this.props.errorMessage)}
         <div className="row">
           <div className="col-sm-6">
@@ -91,7 +88,8 @@ const form = reduxForm({
 
 function mapStateToProps(state) {
   return {
-    errorMessage: state.user.error
+    errorMessage: state.user.error,
+    isDone: state.user.await
   }
 }
 

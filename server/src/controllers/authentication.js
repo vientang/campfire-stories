@@ -50,8 +50,7 @@ export function register (req, res, next) {
       if (err) { return next(err); }
       // return user with their token
       res.status(201).json({
-        token: tokenForUser(user),
-        user: setUserInfo(user)
+        done: true
       })
     })
   })
@@ -116,7 +115,7 @@ export function roleControl (req, res, next) {
     .findOne({ _id })
     .exec((err, doc) => {
       if (err) { return next(err); }
-      let newRole = (doc.role === 'Admin') ? 'Member': 'Admin';
+      let newRole = (doc.role === 'Admin') ? 'Writer': 'Admin';
 
       User.findOneAndUpdate(
         { _id },
